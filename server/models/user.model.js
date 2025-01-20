@@ -5,11 +5,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    socialMedia_url: {
+    socialMedia: {
         type: String,
         required: true
     },
-    imageFile:[{
+    images:[{
         type:String,
         required: true
     }]

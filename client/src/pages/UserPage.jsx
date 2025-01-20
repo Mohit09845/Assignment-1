@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";  
 
 const UserPage = () => {
     const [name, setName] = useState("");
     const [socialMedia, setSocialMedia] = useState("");
     const [images, setImages] = useState([]);
+    const navigate = useNavigate();  
 
     const handleFileChange = (e) => {
-        setImages(e.target.files);
+        setImages([...e.target.files]);  
     };
     
+
     const { mutate, isLoading, isError, isSuccess, error } = useMutation(
         async (formData) => {
             return axios.post("http://localhost:8080/api/v1/user/", formData, {
@@ -19,9 +21,14 @@ const UserPage = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
+        },
+        {
+            onSuccess: () => {
+                navigate("/admin");  
+            },
         }
     );
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -30,7 +37,6 @@ const UserPage = () => {
         formData.append("socialMedia", socialMedia);
         Array.from(images).forEach((file) => formData.append("images", file));
 
-        
         mutate(formData);
     };
 

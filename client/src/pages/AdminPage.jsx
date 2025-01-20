@@ -31,7 +31,7 @@ const AdminPage = () => {
 
     return (
         <div className="max-w-4xl mx-auto mt-8">
-            <h1 className="text-3xl font-bold text-center mb-6">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-center mb-6">Dashboard</h1>
             {users.length === 0 ? (
                 <p className="text-center">No user submissions found.</p>
             ) : (
